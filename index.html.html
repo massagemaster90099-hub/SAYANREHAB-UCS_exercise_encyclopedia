@@ -1,0 +1,1879 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Энциклопедия упражнений ВПС — SAYAN REHAB</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-green: #3D8B5E;
+            --color-green-light: #5AB07A;
+            --color-green-dark: #2D6B4A;
+            --color-bg: #F8F8F3;
+            --color-white: #FFFFFF;
+            --color-text: #1A1A1A;
+            --color-text-light: #666666;
+            --color-border: #E5E5E5;
+            --color-accent-m1: #FF9800;
+            --color-accent-m2: #4CAF50;
+            --color-accent-m3: #2196F3;
+            --color-accent-m4: #9C27B0;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 20px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 40px rgba(0,0,0,0.15);
+            --radius: 16px;
+            --radius-sm: 10px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--color-bg);
+            background-image: url("image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+
+        /* HEADER */
+        .header {
+            background: var(--color-white);
+            border-bottom: 3px solid var(--color-green);
+            padding: 50px 20px 40px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: clamp(48px, 8vw, 80px);
+            font-weight: 900;
+            color: var(--color-green);
+            line-height: 0.9;
+            letter-spacing: -2px;
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: var(--color-text-light);
+            font-weight: 500;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .meta-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+            font-size: 14px;
+            color: var(--color-text-light);
+        }
+
+        .meta-info span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: var(--color-bg);
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        /* CONTAINER */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+
+        /* FILTERS */
+        .filters-section {
+            background: var(--color-white);
+            padding: 30px;
+            border-radius: var(--radius);
+            margin-bottom: 40px;
+            box-shadow: var(--shadow-md);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .filters-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .filters-title {
+            font-family: var(--font-heading);
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .exercises-count {
+            background: var(--color-green);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .filters {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 12px 24px;
+            background: transparent;
+            border: 2px solid var(--color-border);
+            border-radius: 30px;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: var(--color-text);
+        }
+
+        .filter-btn:hover {
+            border-color: var(--color-green);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .filter-btn.active {
+            background: var(--color-green);
+            border-color: var(--color-green);
+            color: white;
+        }
+
+        .filter-btn[data-filter="m1"].active { background: var(--color-accent-m1); border-color: var(--color-accent-m1); }
+        .filter-btn[data-filter="m2"].active { background: var(--color-accent-m2); border-color: var(--color-accent-m2); }
+        .filter-btn[data-filter="m3"].active { background: var(--color-accent-m3); border-color: var(--color-accent-m3); }
+        .filter-btn[data-filter="m4"].active { background: var(--color-accent-m4); border-color: var(--color-accent-m4); }
+
+        /* EXERCISES GRID */
+        .exercises-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 25px;
+        }
+
+        .exercise-card {
+            background: var(--color-white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .exercise-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--color-green);
+        }
+
+        .exercise-header {
+            padding: 25px;
+            position: relative;
+            background: linear-gradient(135deg, rgba(61, 139, 94, 0.05) 0%, rgba(61, 139, 94, 0.02) 100%);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .exercise-module-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .exercise-module-badge.m1 { background: rgba(255, 152, 0, 0.15); color: #E65100; }
+        .exercise-module-badge.m2 { background: rgba(76, 175, 80, 0.15); color: #1B5E20; }
+        .exercise-module-badge.m3 { background: rgba(33, 150, 243, 0.15); color: #0D47A1; }
+        .exercise-module-badge.m4 { background: rgba(156, 39, 176, 0.15); color: #4A148C; }
+
+        .exercise-number {
+            font-family: var(--font-heading);
+            font-size: 14px;
+            color: var(--color-green);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .exercise-title {
+            font-family: var(--font-heading);
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--color-text);
+            line-height: 1.3;
+        }
+
+        .exercise-body {
+            padding: 25px;
+        }
+
+        .exercise-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: var(--color-text-light);
+            padding: 6px 12px;
+            background: var(--color-bg);
+            border-radius: 6px;
+            font-weight: 500;
+        }
+
+        .meta-item svg {
+            width: 16px;
+            height: 16px;
+            opacity: 0.7;
+        }
+
+        .exercise-description {
+            font-size: 14px;
+            color: var(--color-text-light);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .exercise-details {
+            border-top: 1px solid var(--color-border);
+            padding-top: 20px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            font-size: 13px;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: var(--color-text);
+            min-width: 120px;
+        }
+
+        .detail-value {
+            color: var(--color-text-light);
+            text-align: right;
+            flex: 1;
+        }
+
+        .view-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 15px;
+            color: var(--color-green);
+            font-weight: 600;
+            font-size: 14px;
+            transition: gap 0.3s ease;
+        }
+
+        .exercise-card:hover .view-more {
+            gap: 12px;
+        }
+
+        /* MODAL */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal {
+            background: var(--color-white);
+            border-radius: var(--radius);
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal {
+            transform: scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--color-bg);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--color-text);
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .modal-close:hover {
+            background: var(--color-green);
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--color-green) 0%, var(--color-green-dark) 100%);
+            color: white;
+            padding: 50px 40px 40px;
+            position: relative;
+        }
+
+        .modal-module {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .modal-title {
+            font-family: var(--font-heading);
+            font-size: 36px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 15px;
+        }
+
+        .modal-meta {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            font-size: 14px;
+            opacity: 0.95;
+        }
+
+        .modal-body {
+            padding: 40px;
+        }
+
+        .modal-section {
+            margin-bottom: 35px;
+        }
+
+        .modal-section-title {
+            font-family: var(--font-heading);
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--color-text);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-section-title::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: var(--color-green);
+            border-radius: 2px;
+        }
+
+        .modal-section-content {
+            color: var(--color-text-light);
+            line-height: 1.8;
+            font-size: 15px;
+        }
+
+        .steps-list {
+            list-style: none;
+            counter-reset: step-counter;
+        }
+
+        .steps-list li {
+            counter-increment: step-counter;
+            padding-left: 50px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .steps-list li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 36px;
+            height: 36px;
+            background: var(--color-green);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .tips-box {
+            background: linear-gradient(135deg, rgba(61, 139, 94, 0.08) 0%, rgba(61, 139, 94, 0.03) 100%);
+            border-left: 4px solid var(--color-green);
+            padding: 20px 25px;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            margin-top: 20px;
+        }
+
+        .tips-box strong {
+            color: var(--color-text);
+            display: block;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .tips-box ul {
+            margin-left: 20px;
+        }
+
+        .tips-box li {
+            margin-bottom: 6px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .exercises-grid {
+                grid-template-columns: 1fr;
+            }
+            .modal-header {
+                padding: 40px 25px 30px;
+            }
+            .modal-title {
+                font-size: 26px;
+            }
+            .modal-body {
+                padding: 25px;
+            }
+            .filters {
+                justify-content: center;
+            }
+        }
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--color-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-green);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-green-dark);
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .exercise-card {
+            animation: fadeIn 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <h1 class="logo">SAYAN REHAB</h1>
+        <p class="subtitle">Энциклопедия упражнений ВПС — 54 упражнения с подробными инструкциями</p>
+        <div class="meta-info">
+            <span>🎯 Пенный ролик</span>
+            <span> Резинка</span>
+            <span>⏱️ 15–25 мин/день</span>
+            <span>📚 Модули М1–М4</span>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="filters-section">
+            <div class="filters-header">
+                <h2 class="filters-title">Библиотека упражнений</h2>
+                <div class="exercises-count" id="exerciseCount">Показано: 54 упражнения</div>
+            </div>
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">Все (54)</button>
+                <button class="filter-btn" data-filter="m1">M1 — Мобилизация (16)</button>
+                <button class="filter-btn" data-filter="m2">M2 — Активация (14)</button>
+                <button class="filter-btn" data-filter="m3">M3 — Сила (14)</button>
+                <button class="filter-btn" data-filter="m4">M4 — Лайфстайл (10)</button>
+            </div>
+        </div>
+
+        <div class="exercises-grid" id="exercisesGrid">
+            <!-- Exercises will be inserted here by JavaScript -->
+        </div>
+    </div>
+
+    <!-- MODAL -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+        <div class="modal" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <script>
+        // Complete exercise database with detailed instructions
+        const exercises = [
+            // M1 - МОБИЛИЗАЦИЯ (16 упражнений)
+            {
+                id: 1,
+                module: 'm1',
+                moduleName: 'M1 — Мобилизация',
+                title: 'Растяжка грудных мышц у стены',
+                duration: '2×30 сек на сторону',
+                difficulty: 'Легкий',
+                equipment: 'Стена',
+                target: 'Грудные мышцы (pectoralis major/minor)',
+                description: 'Эффективная растяжка для устранения укорочения грудных мышц, характерного при ВПС.',
+                steps: [
+                    'Встаньте в дверном проеме или у стены',
+                    'Поднимите руку под углом 90°, согните в локте',
+                    'Прижмите предплечье к стене',
+                    'Сделайте шаг вперед, пока не почувствуете растяжение в груди',
+                    'Удерживайте позицию, дышите глубоко',
+                    'Повторите с другой рукой'
+                ],
+                tips: 'Держите спину прямо, не прогибайтесь в пояснице. Угол руки можно менять (90°, 120°, 180°) для растяжки разных волокон.',
+                mistakes: 'Прогиб в пояснице, подъем плеча к уху, задержка дыхания'
+            },
+            {
+                id: 2,
+                module: 'm1',
+                moduleName: 'M1 — Мобилизация',
+                title: 'Пенный ролик: грудной отдел позвоночника',
+                duration: '2-3 минуты',
+                difficulty: 'Легкий',
+                equipment: 'Пенный ролик',
+                target: 'Торакальный отдел позвоночника',
+                description: 'Мобилизация грудного отдела для улучшения подвижности и устранения сутулости.',
+                steps: [
+                    'Лягте на спину, ролик под грудным отделом',
+                    'Руки за головой или скрещены на груди',
+                    'Приподнимите таз',
+                    'Медленно прокатывайтесь от середины спины до шеи',
+                    'Задерживайтесь на болезненных точках 20-30 сек',
+                    'Избегайте поясничного отдела'
+                ],
+                tips: 'Дышите глубоко во время прокатки. Если больно, подложите полотенце под ролик для смягчения.',
+                mistakes: 'Прокатка поясницы, задержка дыхания, слишком быстрое движение'
+            },
+            {
+                id: 3,
+                module: 'm1',
+                moduleName: 'M1 — Мобилизация',
+                title: 'Растяжка передней дельты',
+                duration: '2×30 сек',
+                difficulty: 'Легкий',
+                equipment: 'Стена/дверь',
+                target: 'Передняя дельтовидная мышца',
+                description: 'Растяжка передней части плеча, которая часто укорочена при ВПС.',
+                steps: [
+                    'Встаньте у стены',
+                    'Отведите руку назад и положите ладонь на стену',
+                    'Палец направлены назад',
+                    'Поворачивайте корпус от стены',
+                    'Почувствуйте растяжение в передней части плеча',
+                    'Повторите с другой стороны'
+                ],
+                tips: 'Держите руку на уровне плеча или чуть ниже. Не поднимайте плечо.',
+                mistakes: 'Подъем плеча, сгибание локтя, наклон корпуса вперед'
+            },
+            {
+                id: 4,
+                module: 'm1',
+                moduleName: 'M1 — Мобилизация',
+                title: 'Мобилизация шеи: наклоны и повороты',
+                duration: '10 повторений в каждую сторону',
+                difficulty: 'Легкий',
+                equipment: 'Не требуется',
+                target: 'Шейный отдел позвоночника',
+                description: 'Мягкая мобилизация шейного отдела для снятия напряжения.',
+                steps: [
+                    'Сядьте или встаньте прямо',
+                    'Медленно наклоните голову вправо',
+                    'Вернитесь в исходное положение',
+                    'Наклоните голову влево',
+                    'Повторите 10 раз',
+                    'Выполните повороты головы в стороны'
+                ],
+                tips: 'Движения должны быть плавными и безболезненными. Не запрокидывайте голову назад.',
+                mistakes: 'Резкие движения, подъем плеч, болезненные ощущения'
+            },
+            {
+                id: 5,
+                module: 'm1',
+                moduleName: 'M1 — Мобилизация',
+                title: 'Растяжка верхней трапеции',
+                duration: '2×30 сек на сторону',
+                difficulty: 'Легкий',
+                equipment: 'Не требуется',
+                target: 'Верхняя трапециевидная мышца',
+                description: 'Растяжка напряженной верхней части трапеции.',
+                steps: [
+                    'Сядьте на стул, возьмитесь за сиденье правой рукой',
+                    'Наклоните голову влево',
+                    'Левой рукой мягко усильте растяжку',
+                    'Плечо правой руки тяните вниз',
+                    'Удерживайте 30 секунд',
+                    'Повторите с другой стороны'
+                ],
+                tips: 'Растяжка должна быть комфортной, без боли. Дышите глубоко.',
+                mistakes: 'Слишком сильное давление рукой, подъем противоположного плеча'
+            },
+            {
+                id: 6,
+                module: 'm1',
+                moduleName: 'M1 — Мобилизация',
+                title: 'Пенный ролик: широчайшие мышцы спины',
+                duration: '2 минуты на сторону',
+                difficulty: 'Средний',
+                equipment: 'Пенный ролик',
+                target: 'Широчайшие мышцы спины',
+                description: 'Релиз широчайших мышц для улучшения подвижности плечевого пояса.',
+                steps: [
+                    'Лягте на бок, ролик под подмышкой',
+                    'Нижняя рука вытянута вверх',
+                    'Катитесь от подмышки до середины спины',
+                    'Задерживайтесь на болезненных точках',
+                    'Повернитесь на другой бок и повторите'
+                ],
+                tips: 'Это может быть болезненно. Дышите глубоко и расслабляйтесь.',
+                mistakes: 'Прокатка поясницы, задержка дыхания, слишком быстрое движение'
+            },
+            {
+                id: 7,
+                module: 'm1',
+                moduleName: 'M1 — Мобилизация',
+                title: 'Растяжка levator scapulae (мышца, поднимающая лопатку)',
+                duration: '2×30 сек',
+                difficulty: 'Средний',
+                equipment: 'Не требуется',
+                target: 'Levator scapulae',
+                description: 'Растяжка мышцы, которая часто вызывает боль в шее и между лопаток.',
+                steps: [
+                    'Сядьте прямо',
+                    'Поверните голову на 45° вправо',
+                    'Наклоните голову вниз, как будто смотрите в подмышку',
+                    'Правой рукой мягко усильте растяжку',
+                    'Удерживайте 30 секунд',
+                    'Повторите с другой стороны'
+                ],
+                tips: 'Растяжка должна ощущаться по задней поверхности шеи и между лопаток.',
+                mistakes: 'Слишком резкое движение, округление спины'
+            },
+            {
+                id: 8,
+                module: 'm1',
+                moduleName: 'M1 — Мобилизация',
+                title: 'Мобилизация плечевого сустава: круговые движения',
+                duration: '10 вперед, 10 назад',
+                difficulty: 'Легкий',
+                equipment: 'Не требуется',
+                target: 'Плечевой сустав',
+                description: 'Динамическая мобилизация плечевых суставов.',
+                steps: [
+                    'Встаньте прямо, руки вдоль тела',
+                    'Поднимите плечи к ушам',
+                    'Отведите назад',
+                    'Опустите вниз',
+                    'Выведите вперед',
+                    'Выполните 10 кругов, затем в обратную сторону'
+                ],
+                tips: 'Делайте большие амплитудные движения. Расслабьте шею.',
+                mistakes: 'Малая амплитуда, напряжение в шее'
+            },
+            {
+                id: 9,
+                module: 'm1',
+                moduleName: 'M1 — Мобилизация',
+                title: 'Растяжка SCM (грудино-ключично-сосцевидной мышцы)',
+                duration: '2×20 сек',
+                difficulty: 'Средний',
+                equipment: 'Не требуется',
+                target: 'SCM мышца',
+                description: 'Растяжка мышцы шеи, которая влияет на положение головы.',
+                steps: [
+                    'Сядьте прямо',
+                    'Поверните голову влево',
+                    'Наклоните голову назад и вправо',
+                    'Почувствуйте растяжение по передней поверхности шеи слева',
+                    'Можно помочь рукой',
+                    'Повторите с другой стороны'
+                ],
+                tips: 'Очень деликатная растяжка. Не переусердствуйте.',
+                mistakes: 'Слишком сильное давление, головокружение'
+            },
+            {
+                id: 10,
+                module: 'm1',
+                moduleName: 'M1 — Мобилизация',
+                title: 'Кошка-корова (Cat-Cow)',
+                duration: '1-2 минуты',
+                difficulty: 'Легкий',
+                equipment: 'Коврик',
+                target: 'Весь позвоночник',
+                description: 'Классическое упражнение для мобилизации всего позвоночника.',
+                steps: [
+                    'Встаньте на четвереньки',
+                    'На вдохе прогнитесь, голова вверх (корова)',
+                    'Грудная клетка раскрыта, лопатки вместе',
+                    'На выдохе округлите спину (кошка)',
+                    'Подбородок к груди',
+                    'Повторяйте плавно 10-15 раз'
+                ],
+                tips: 'Двигайтесь синхронно с дыханием. Движение должно начинаться от таза.',
+                mistakes: 'Движение только в грудном отделе, задержка дыхания'
+            },
+            {
+                id: 11,
+                module: 'm1',
+                moduleName: 'M1 — Мобилизация',
+                title: 'Растяжка pectoralis minor (малой грудной мышцы)',
+                duration: '2×30 сек',
+                difficulty: 'Средний',
+                equipment: 'Мяч/валик',
+                target: 'Pectoralis minor',
+                description: 'Глубокая растяжка малой грудной мышцы.',
+                steps: [
+                    'Лягте на спину',
+                    'Положите мяч под область ключицы (ближе к плечу)',
+                    'Вытяните руку вверх',
+                    'Найдите болезненную точку',
+                    'Задержитесь на 30 секунд',
+                    'Повторите с другой стороны'
+                ],
+                tips: 'Малая грудная мышца часто триггерная. Будьте осторожны.',
+                mistakes: 'Слишком сильное давление, онемение руки'
+            },
+            {
+                id: 12,
+                module: 'm1',
+                moduleName: 'M1 — Мобилизация',
+                title: 'Вращение корпуса сидя',
+                duration: '10 раз в каждую сторону',
+                difficulty: 'Легкий',
+                equipment: 'Стул',
+                target: 'Грудной отдел позвоночника',
+                description: 'Мобилизация грудного отдела через вращение.',
+                steps: [
+                    'Сядьте на стул прямо',
+                    'Руки за головой или скрещены на груди',
+                    'Поверните корпус вправо',
+                    'Задержитесь на 2-3 секунды',
+                    'Вернитесь в центр',
+                    'Повторите влево'
+                ],
+                tips: 'Вращение должно происходить в грудном отделе, а не в пояснице.',
+                mistakes: 'Вращение в пояснице, наклон корпуса вперед'
+            },
+            {
+                id: 13,
+                module: 'm1',
+                moduleName: 'M1 — Мобилизация',
+                title: 'Растяжка подзатылочных мышц (Suboccipitals)',
+                duration: '2 минуты',
+                difficulty: 'Средний',
+                equipment: 'Два теннисных мяча/валик',
+                target: 'Подзатылочные мышцы',
+                description: 'Релиз мышц у основания черепа для снятия головных болей.',
+                steps: [
+                    'Свяжите два теннисных мяча в носке',
+                    'Лягте на спину, мячи под основание черепа',
+                    'Подбородок слегка прижат к груди',
+                    'Расслабьтесь и дышите',
+                    'Можно делать мелкие кивательные движения',
+                    'Лежите 2 минуты'
+                ],
+                tips: 'Очень расслабляющее упражнение. Можно делать перед сном.',
+                mistakes: 'Слишком высокое положение мячей, напряжение'
+            },
+            {
+                id: 14,
+                module: 'm1',
+                moduleName: 'M1 — Мобилизация',
+                title: 'Thread the needle (Игла в ушко)',
+                duration: '2×30 сек на сторону',
+                difficulty: 'Легкий',
+                equipment: 'Коврик',
+                target: 'Плечи, грудной отдел',
+                description: 'Растяжка плеч и верхней части спины.',
+                steps: [
+                    'Встаньте на четвереньки',
+                    'Правую руку проведите под левой',
+                    'Опустите правое плечо на пол',
+                    'Левую руку можно вытянуть вперед',
+                    'Расслабьте шею',
+                    'Повторите с другой стороны'
+                ],
+                tips: 'Растяжка должна ощущаться между лопаток и в плече.',
+                mistakes: 'Подъем таза, напряжение в шее'
+            },
+            {
+                id: 15,
+                module: 'm1',
+                moduleName: 'M1 — Мобилизация',
+                title: 'Диафрагмальное дыхание',
+                duration: '3-5 минут',
+                difficulty: 'Легкий',
+                equipment: 'Не требуется',
+                target: 'Диафрагма, дыхательная система',
+                description: 'Обучение правильному дыханию для активации диафрагмы.',
+                steps: [
+                    'Лягте на спину, ноги согнуты',
+                    'Одну руку на грудь, другую на живот',
+                    'Вдох через нос — надувается живот',
+                    'Грудь остается неподвижной',
+                    'Выдох через рот — живот втягивается',
+                    'Дышите 3-5 минут'
+                ],
+                tips: 'Это фундаментальное упражнение. Практикуйте ежедневно.',
+                mistakes: 'Дыхание грудью, подъем плеч на вдохе'
+            },
+            {
+                id: 16,
+                module: 'm1',
+                moduleName: 'M1 — Мобилизация',
+                title: 'Растяжка широчайших у стены',
+                duration: '2×30 сек',
+                difficulty: 'Легкий',
+                equipment: 'Стена',
+                target: 'Широчайшие мышцы спины',
+                description: 'Статическая растяжка широчайших мышц.',
+                steps: [
+                    'Встаньте лицом к стене',
+                    'Возьмитесь за стену руками на уровне плеч',
+                    'Отойдите назад',
+                    'Опустите таз назад и вниз',
+                    'Почувствуйте растяжение в спине',
+                    'Удерживайте 30 секунд'
+                ],
+                tips: 'Держите спину прямо, не округляйтесь.',
+                mistakes: 'Округление спины, сгибание ног'
+            },
+
+            // M2 - АКТИВАЦИЯ (14 упражнений)
+            {
+                id: 17,
+                module: 'm2',
+                moduleName: 'M2 — Активация',
+                title: 'Y-T-W разведения',
+                duration: '3×10 повторений каждой позиции',
+                difficulty: 'Средний',
+                equipment: 'Не требуется/легкие гантели',
+                target: 'Ромбовидные, средняя и нижняя трапеция',
+                description: 'Комплексное упражнение для активации мышц верхней части спины.',
+                steps: [
+                    'Лягте на живот, лоб на полотенце',
+                    'Руки вытяните вперед (позиция Y)',
+                    'Поднимите руки, сжимая лопатки',
+                    'Опустите, разведите в стороны (позиция T)',
+                    'Поднимите, затем согните локти (позиция W)',
+                    'Большие пальцы направлены вверх'
+                ],
+                tips: 'Поднимайте руки за счет сведения лопаток, не за счет шеи. Движения медленные и контролируемые.',
+                mistakes: 'Подъем плеч к ушам, прогиб в пояснице, рывки'
+            },
+            {
+                id: 18,
+                module: 'm2',
+                moduleName: 'M2 — Активация',
+                title: 'Chin tucks (подбородок к шее)',
+                duration: '3×10 повторений, удержание 5 сек',
+                difficulty: 'Легкий',
+                equipment: 'Не требуется',
+                target: 'Глубокие сгибатели шеи',
+                description: 'Ключевое упражнение для коррекции положения головы.',
+                steps: [
+                    'Сядьте или встаньте прямо',
+                    'Смотрите прямо перед собой',
+                    'Отведите голову назад, как будто делаете двойной подбородок',
+                    'Не наклоняйте голову вниз или вверх',
+                    'Удерживайте 5 секунд',
+                    'Вернитесь в исходное положение'
+                ],
+                tips: 'Движение должно быть горизонтальным. Представьте, что вас тянут за макушку вверх.',
+                mistakes: 'Наклон головы вниз, подъем плеч, слишком резкое движение'
+            },
+            {
+                id: 19,
+                module: 'm2',
+                moduleName: 'M2 — Активация',
+                title: 'Scapular retraction (сведение лопаток)',
+                duration: '3×15 повторений',
+                difficulty: 'Легкий',
+                equipment: 'Не требуется',
+                target: 'Ромбовидные, средняя трапеция',
+                description: 'Базовое упражнение для обучения правильному положению лопаток.',
+                steps: [
+                    'Сядьте или встаньте прямо',
+                    'Руки вдоль тела',
+                    'Сведите лопатки вместе',
+                    'Представьте, что зажимаете карандаш между ними',
+                    'Не поднимайте плечи',
+                    'Удерживайте 2-3 секунды, расслабьтесь'
+                ],
+                tips: 'Движение должно быть только лопатками, не руками. Плечи остаются опущенными.',
+                mistakes: 'Подъем плеч, прогиб в пояснице, задержка дыхания'
+            },
+            {
+                id: 20,
+                module: 'm2',
+                moduleName: 'M2 — Активация',
+                title: 'Wall slides (скольжение по стене)',
+                duration: '3×10 повторений',
+                difficulty: 'Средний',
+                equipment: 'Стена',
+                target: 'Нижняя трапеция, передняя зубчатая',
+                description: 'Упражнение для активации нижней трапеции и улучшения подвижности плеч.',
+                steps: [
+                    'Встаньте спиной к стене',
+                    'Прижмите поясницу, ягодицы, лопатки и затылок',
+                    'Руки согнуты в локтях, прижаты к стене',
+                    'Медленно скользите руками вверх',
+                    'Не отрывайте руки и спину от стены',
+                    'Опустите вниз'
+                ],
+                tips: 'Если сложно, начните с меньшей амплитуды. Главное — контакт со стеной.',
+                mistakes: 'Отрыв рук от стены, прогиб в пояснице, подъем плеч'
+            },
+            {
+                id: 21,
+                module: 'm2',
+                moduleName: 'M2 — Активация',
+                title: 'Face pulls с резинкой',
+                duration: '3×12-15 повторений',
+                difficulty: 'Средний',
+                equipment: 'Эластичная резинка',
+                target: 'Задняя дельта, ромбовидные, нижняя трапеция',
+                description: 'Одно из лучших упражнений для коррекции ВПС.',
+                steps: [
+                    'Закрепите резинку на уровне лица',
+                    'Возьмитесь за концы, отойдите назад',
+                    'Руки вытянуты перед собой',
+                    'Тяните резинку к лицу, разводя локти в стороны',
+                    'В конечной точке руки согнуты, локти выше кистей',
+                    'Сведите лопатки, вернитесь в исходное'
+                ],
+                tips: 'Локти должны идти вверх и назад. Фокус на задней дельте и лопатках.',
+                mistakes: 'Тяга руками, а не лопатками, локти вниз, прогиб в пояснице'
+            },
+            {
+                id: 22,
+                module: 'm2',
+                moduleName: 'M2 — Активация',
+                title: 'Serratus punches (проакция лопаток)',
+                duration: '3×12 на сторону',
+                difficulty: 'Легкий',
+                equipment: 'Резинка/гантель',
+                target: 'Передняя зубчатая мышца',
+                description: 'Активация передней зубчатой мышцы для стабильности лопаток.',
+                steps: [
+                    'Лягте на спину, рука с гантелью/резинкой вверх',
+                    'Рука прямая',
+                    'Опустите лопатку вниз',
+                    'Поднимите лопатку вверх, отрывая плечо от пола',
+                    'Движение только за счет лопатки',
+                    'Рука остается прямой'
+                ],
+                tips: 'Это движение лопатки вперед и вверх. Рука не сгибается.',
+                mistakes: 'Сгибание руки, движение всей рукой, а не лопаткой'
+            },
+            {
+                id: 23,
+                module: 'm2',
+                moduleName: 'M2 — Активация',
+                title: 'External rotation с резинкой (внешняя ротация плеча)',
+                duration: '3×12-15 на сторону',
+                difficulty: 'Средний',
+                equipment: 'Эластичная резинка',
+                target: 'Rotator cuff (внешние ротаторы плеча)',
+                description: 'Укрепление ротаторной манжеты плеча.',
+                steps: [
+                    'Закрепите резинку на уровне талии',
+                    'Встаньте боком к точке крепления',
+                    'Возьмитесь за резинку, локоть прижат к телу, согнут на 90°',
+                    'Поверните предплечье наружу',
+                    'Локоть остается на месте',
+                    'Вернитесь в исходное'
+                ],
+                tips: 'Движение только в плечевом суставе. Локоть зафиксирован.',
+                mistakes: 'Движение локтя, подъем плеча, использование инерции'
+            },
+            {
+                id: 24,
+                module: 'm2',
+                moduleName: 'M2 — Активация',
+                title: 'Prone cobra (кобра лежа на животе)',
+                duration: '3×15-20 секунд',
+                difficulty: 'Средний',
+                equipment: 'Коврик',
+                target: 'Разгибатели спины, нижняя трапеция',
+                description: 'Изометрическое упражнение для укрепления задней цепи.',
+                steps: [
+                    'Лягте на живот, руки вдоль тела',
+                    'Лоб на полу',
+                    'Поднимите грудь от пола',
+                    'Отведите плечи назад и вниз',
+                    'Руки разверните ладонями вверх',
+                    'Удерживайте позицию'
+                ],
+                tips: 'Подъем за счет мышц спины, не за счет рывка. Шея длинная.',
+                mistakes: 'Запрокидывание головы, прогиб в пояснице, задержка дыхания'
+            },
+            {
+                id: 25,
+                module: 'm2',
+                moduleName: 'M2 — Активация',
+                title: 'Band pull-aparts (разведения с резинкой)',
+                duration: '3×15-20 повторений',
+                difficulty: 'Легкий',
+                equipment: 'Эластичная резинка',
+                target: 'Задние дельты, ромбовидные',
+                description: 'Простое и эффективное упражнение для верхней части спины.',
+                steps: [
+                    'Возьмите резинку прямыми руками перед собой',
+                    'Руки на ширине плеч или чуть шире',
+                    'Разведите руки в стороны',
+                    'Резинка касается груди',
+                    'Сведите лопатки',
+                    'Вернитесь в исходное'
+                ],
+                tips: 'Руки прямые, движение за счет лопаток. Резинка должна быть средней жесткости.',
+                mistakes: 'Сгибание рук, подъем плеч, рывки'
+            },
+            {
+                id: 26,
+                module: 'm2',
+                moduleName: 'M2 — Активация',
+                title: 'Dead bug (мертвый жук)',
+                duration: '3×10 на сторону',
+                difficulty: 'Средний',
+                equipment: 'Коврик',
+                target: 'Core, стабилизация корпуса',
+                description: 'Упражнение для стабилизации корпуса и координации.',
+                steps: [
+                    'Лягте на спину, руки вверх',
+                    'Ноги согнуты под 90° (голень параллельна полу)',
+                    'Прижмите поясницу к полу',
+                    'Опустите правую руку и левую ногу',
+                    'Не касайтесь пола',
+                    'Вернитесь, повторите с другой стороны'
+                ],
+                tips: 'Поясница должна оставаться прижатой. Движения медленные и контролируемые.',
+                mistakes: 'Отрыв поясницы от пола, слишком быстрое выполнение'
+            },
+            {
+                id: 27,
+                module: 'm2',
+                moduleName: 'M2 — Активация',
+                title: 'Shoulder blade squeezes (сведение лопаток сидя)',
+                duration: '3×15 повторений',
+                difficulty: 'Легкий',
+                equipment: 'Стул',
+                target: 'Ромбовидные, средняя трапеция',
+                description: 'Упражнение для офисных работников.',
+                steps: [
+                    'Сядьте на стул прямо',
+                    'Руки вдоль тела',
+                    'Сведите лопатки вместе',
+                    'Удерживайте 3-5 секунд',
+                    'Расслабьтесь',
+                    'Повторите 15 раз'
+                ],
+                tips: 'Можно делать каждые 30 минут за компьютером.',
+                mistakes: 'Подъем плеч, сутулость'
+            },
+            {
+                id: 28,
+                module: 'm2',
+                moduleName: 'M2 — Активация',
+                title: 'Neck isometrics (изометрия шеи)',
+                duration: '5×10 секунд в каждом направлении',
+                difficulty: 'Легкий',
+                equipment: 'Не требуется',
+                target: 'Мышцы шеи',
+                description: 'Изометрическое укрепление мышц шеи.',
+                steps: [
+                    'Сядьте прямо',
+                    'Положите ладонь на лоб',
+                    'Давите головой на руку, рука сопротивляется',
+                    'Голова не двигается',
+                    'Удерживайте 10 секунд',
+                    'Повторите для затылка и боков'
+                ],
+                tips: 'Голова не должна двигаться. Только напряжение мышц.',
+                mistakes: 'Движение головы, слишком сильное давление'
+            },
+            {
+                id: 29,
+                module: 'm2',
+                moduleName: 'M2 — Активация',
+                title: 'Reverse fly с резинкой',
+                duration: '3×12-15 повторений',
+                difficulty: 'Средний',
+                equipment: 'Эластичная резинка',
+                target: 'Задние дельты, ромбовидные',
+                description: 'Изолированная работа задних дельт.',
+                steps: [
+                    'Возьмите резинку, руки перед собой',
+                    'Слегка согните локти',
+                    'Разведите руки в стороны',
+                    'Локти на уровне плеч или чуть выше',
+                    'Сведите лопатки',
+                    'Вернитесь в исходное'
+                ],
+                tips: 'Фокус на задних дельтах, не на трапеции.',
+                mistakes: 'Подъем плеч к ушам, рывки, слишком большой вес'
+            },
+            {
+                id: 30,
+                module: 'm2',
+                moduleName: 'M2 — Активация',
+                title: 'Plank to downward dog',
+                duration: '3×10 повторений',
+                difficulty: 'Средний',
+                equipment: 'Коврик',
+                target: 'Core, мобильность плеч',
+                description: 'Комбинация стабильности и мобильности.',
+                steps: [
+                    'Встаньте в планку на прямых руках',
+                    'Напрягите пресс',
+                    'Поднимите таз вверх',
+                    'Перейдите в downward dog (собака мордой вниз)',
+                    'Пятки тяните к полу',
+                    'Вернитесь в планку'
+                ],
+                tips: 'Движение плавное, контроль корпуса.',
+                mistakes: 'Провисание поясницы, сутулость'
+            },
+
+            // M3 - СИЛА (14 упражнений)
+            {
+                id: 31,
+                module: 'm3',
+                moduleName: 'M3 — Сила',
+                title: 'Тяга резинки к поясу',
+                duration: '4×12 повторений',
+                difficulty: 'Средний',
+                equipment: 'Эластичная резинка',
+                target: 'Широчайшие, ромбовидные, средняя трапеция',
+                description: 'Базовое упражнение для укрепления спины.',
+                steps: [
+                    'Закрепите резинку на уровне груди',
+                    'Возьмитесь за концы',
+                    'Отойдите, создав натяжение',
+                    'Спина прямая, корпус слегка наклонен',
+                    'Тяните резинку к нижней части груди',
+                    'Локти идут вдоль тела',
+                    'Сведите лопатки в конечной точке'
+                ],
+                tips: 'Тяга за счет лопаток, не только руками. Корпус стабилен.',
+                mistakes: 'Округление спины, рывки, подъем плеч'
+            },
+            {
+                id: 32,
+                module: 'm3',
+                moduleName: 'M3 — Сила',
+                title: 'Face pulls с весом',
+                duration: '4×10-12 повторений',
+                difficulty: 'Сложный',
+                equipment: 'Кабель/резинка',
+                target: 'Задняя дельта, rotator cuff',
+                description: 'Продвинутая версия face pulls.',
+                steps: [
+                    'Закрепите резинку выше головы',
+                    'Возьмитесь за концы',
+                    'Тяните к лицу',
+                    'Локти вверх и назад',
+                    'Внешняя ротация в конечной точке',
+                    'Контролируемое возвращение'
+                ],
+                tips: 'Фокус на задней дельте и внешних ротаторах.',
+                mistakes: 'Использование инерции, локти вниз'
+            },
+            {
+                id: 33,
+                module: 'm3',
+                moduleName: 'M3 — Сила',
+                title: 'Reverse fly с гантелями',
+                duration: '3×12 повторений',
+                difficulty: 'Средний',
+                equipment: 'Гантели',
+                target: 'Задние дельты',
+                description: 'Изолированная проработка задних дельт.',
+                steps: [
+                    'Возьмите легкие гантели',
+                    'Наклонитесь вперед, спина прямая',
+                    'Руки слегка согнуты',
+                    'Разведите руки в стороны',
+                    'Локти на уровне плеч',
+                    'Опустите вниз'
+                ],
+                tips: 'Легкий вес, много повторений. Фокус на технике.',
+                mistakes: 'Слишком тяжелый вес, рывки, подъем трапеции'
+            },
+            {
+                id: 34,
+                module: 'm3',
+                moduleName: 'M3 — Сила',
+                title: 'Prone Y raise',
+                duration: '3×10 повторений',
+                difficulty: 'Средний',
+                equipment: 'Гантели/без веса',
+                target: 'Нижняя трапеция',
+                description: 'Целенаправленная активация нижней трапеции.',
+                steps: [
+                    'Лягте на живот на наклонной скамье',
+                    'Руки вытянуты вперед под углом',
+                    'Большие пальцы вверх',
+                    'Поднимите руки',
+                    'Фокус на сведении лопаток вниз',
+                    'Опустите'
+                ],
+                tips: 'Нижняя трапеция тянет лопатки вниз и внутрь.',
+                mistakes: 'Подъем верхней трапеции, прогиб в пояснице'
+            },
+            {
+                id: 35,
+                module: 'm3',
+                moduleName: 'M3 — Сила',
+                title: 'Cable rows (тяга на блоке)',
+                duration: '4×10 повторений',
+                difficulty: 'Средний',
+                equipment: 'Тренажер',
+                target: 'Спина (широчайшие, ромбовидные)',
+                description: 'Классическое упражнение для спины.',
+                steps: [
+                    'Сядьте на тренажер',
+                    'Возьмитесь за рукоять',
+                    'Спина прямая',
+                    'Тяните к животу',
+                    'Локти вдоль тела',
+                    'Сведите лопатки',
+                    'Вернитесь'
+                ],
+                tips: 'Корпус стабилен, движение за счет спины.',
+                mistakes: 'Раскачивание корпусом, округление спины'
+            },
+            {
+                id: 36,
+                module: 'm3',
+                moduleName: 'M3 — Сила',
+                title: 'External rotation с гантелью',
+                duration: '3×12 на сторону',
+                difficulty: 'Средний',
+                equipment: 'Гантель',
+                target: 'Rotator cuff',
+                description: 'Укрепление ротаторной манжеты.',
+                steps: [
+                    'Лягте на бок',
+                    'Нижняя рука под головой',
+                    'Верхняя рука с гантелью согнута на 90°',
+                    'Локоть прижат к телу',
+                    'Поверните предплечье вверх',
+                    'Опустите'
+                ],
+                tips: 'Легкий вес, контроль движения.',
+                mistakes: 'Движение локтя, слишком тяжелый вес'
+            },
+            {
+                id: 37,
+                module: 'm3',
+                moduleName: 'M3 — Сила',
+                title: 'Lat pulldown (тяга верхнего блока)',
+                duration: '4×10 повторений',
+                difficulty: 'Средний',
+                equipment: 'Тренажер',
+                target: 'Широчайшие мышцы спины',
+                description: 'Базовое упражнение для широчайших.',
+                steps: [
+                    'Сядьте в тренажер',
+                    'Возьмитесь широким хватом',
+                    'Тяните рукоять к верхней части груди',
+                    'Локти вниз и вперед',
+                    'Спина слегка наклонена',
+                    'Контролируемое возвращение'
+                ],
+                tips: 'Не отклоняйтесь сильно назад.',
+                mistakes: 'Инерция, тяга за голову, округление спины'
+            },
+            {
+                id: 38,
+                module: 'm3',
+                moduleName: 'M3 — Сила',
+                title: 'Seated row (тяга горизонтального блока)',
+                duration: '4×10 повторений',
+                difficulty: 'Средний',
+                equipment: 'Тренажер',
+                target: 'Средина спины',
+                description: 'Упражнение для толщины спины.',
+                steps: [
+                    'Сядьте в тренажер',
+                    'Ноги слегка согнуты',
+                    'Спина прямая',
+                    'Тяните рукоять к животу',
+                    'Локти вдоль тела',
+                    'Сведите лопатки'
+                ],
+                tips: 'Корпус стабилен, не раскачивайтесь.',
+                mistakes: 'Раскачивание, округление спины'
+            },
+            {
+                id: 39,
+                module: 'm3',
+                moduleName: 'M3 — Сила',
+                title: 'Reverse grip pulldown (тяга обратным хватом)',
+                duration: '3×10 повторений',
+                difficulty: 'Средний',
+                equipment: 'Тренажер',
+                target: 'Низ широчайших, бицепс',
+                description: 'Акцент на нижнюю часть широчайших.',
+                steps: [
+                    'Возьмитесь обратным хватом (ладони к себе)',
+                    'Руки на ширине плеч',
+                    'Тяните к груди',
+                    'Локти вдоль тела',
+                    'Контролируйте движение'
+                ],
+                tips: 'Обратный хват включает больше бицепса.',
+                mistakes: 'Рывки, отклонение корпуса'
+            },
+            {
+                id: 40,
+                module: 'm3',
+                moduleName: 'M3 — Сила',
+                title: 'Single arm row (тяга одной рукой)',
+                duration: '3×10 на сторону',
+                difficulty: 'Средний',
+                equipment: 'Гантель/резинка',
+                target: 'Широчайшие',
+                description: 'Устранение дисбаланса между сторонами.',
+                steps: [
+                    'Одно колено и рука на скамье',
+                    'Спина прямая',
+                    'Гантель в другой руке',
+                    'Тяните к бедру',
+                    'Локоть вдоль тела',
+                    'Опустите'
+                ],
+                tips: 'Не вращайте корпус.',
+                mistakes: 'Вращение корпуса, рывки'
+            },
+            {
+                id: 41,
+                module: 'm3',
+                moduleName: 'M3 — Сила',
+                title: 'Chest supported row (тяга с упором в грудь)',
+                duration: '3×12 повторений',
+                difficulty: 'Средний',
+                equipment: 'Наклонная скамья, гантели',
+                target: 'Ромбовидные, средняя трапеция',
+                description: 'Изолированная работа спины без нагрузки на поясницу.',
+                steps: [
+                    'Лягте грудью на наклонную скамью',
+                    'Гантели в руках',
+                    'Тяните к бедрам',
+                    'Локти вдоль тела',
+                    'Сведите лопатки'
+                ],
+                tips: 'Поясница разгружена, фокус на лопатках.',
+                mistakes: 'Рывки, подъем плеч'
+            },
+            {
+                id: 42,
+                module: 'm3',
+                moduleName: 'M3 — Сила',
+                title: 'Band external rotation (внешняя ротация с резинкой)',
+                duration: '3×15 повторений',
+                difficulty: 'Легкий',
+                equipment: 'Резинка',
+                target: 'Rotator cuff',
+                description: 'Профилактика травм плеча.',
+                steps: [
+                    'Резинка перед собой',
+                    'Руки согнуты на 90°',
+                    'Локти прижаты',
+                    'Разведите предплечья наружу',
+                    'Вернитесь'
+                ],
+                tips: 'Разминка перед жимовыми упражнениями.',
+                mistakes: 'Движение локтей'
+            },
+            {
+                id: 43,
+                module: 'm3',
+                moduleName: 'M3 — Сила',
+                title: 'Inverted row (австралийские подтягивания)',
+                duration: '3×10 повторений',
+                difficulty: 'Средний',
+                equipment: 'Турник/TRX',
+                target: 'Спина',
+                description: 'Горизонтальная тяга собственного веса.',
+                steps: [
+                    'Лягте под турник',
+                    'Возьмитесь за перекладину',
+                    'Тело прямое',
+                    'Подтянитесь грудью к перекладине',
+                    'Опуститесь'
+                ],
+                tips: 'Чем ниже перекладина, тем сложнее.',
+                mistakes: 'Провисание таза, рывки'
+            },
+            {
+                id: 44,
+                module: 'm3',
+                moduleName: 'M3 — Сила',
+                title: "Farmer's carry (прогулка фермера)",
+                duration: '3×30 метров',
+                difficulty: 'Средний',
+                equipment: 'Гантели/гири',
+                target: 'Трапеция, стабилизация корпуса',
+                description: 'Функциональное упражнение для всей верхней части тела.',
+                steps: [
+                    'Возьмите тяжелые гантели',
+                    'Встаньте прямо',
+                    'Плечи отведены назад',
+                    'Идите вперед',
+                    'Держите осанку',
+                    'Не сутультесь'
+                ],
+                tips: 'Отличное упражнение для осанки и силы хвата.',
+                mistakes: 'Сутулость, наклон корпуса'
+            },
+
+            // M4 - ЛАЙФСТАЙЛ (10 упражнений)
+            {
+                id: 45,
+                module: 'm4',
+                moduleName: 'M4 — Лайфстайл',
+                title: 'Коррекция положения за компьютером',
+                duration: 'Постоянно',
+                difficulty: 'Легкий',
+                equipment: 'Эргономика рабочего места',
+                target: 'Профилактика ВПС',
+                description: 'Правильная организация рабочего места.',
+                steps: [
+                    'Монитор на уровне глаз',
+                    'Расстояние до монитора 50-70 см',
+                    'Спина прижата к спинке стула',
+                    'Ноги на полу или подставке',
+                    'Локти под 90°',
+                    'Запястья прямые'
+                ],
+                tips: 'Верх монитора должен быть на уровне глаз. Используйте подставку для ноутбука.',
+                mistakes: 'Ноутбук на столе (низко), сутулость, наклон головы вперед'
+            },
+            {
+                id: 46,
+                module: 'm4',
+                moduleName: 'M4 — Лайфстайл',
+                title: 'Микропаузы каждые 30 минут',
+                duration: '2 минуты каждые 30 мин',
+                difficulty: 'Легкий',
+                equipment: 'Таймер',
+                target: 'Профилактика застоя',
+                description: 'Регулярные перерывы для движения.',
+                steps: [
+                    'Поставьте таймер на 30 минут',
+                    'Встаньте',
+                    'Сделайте 5 chin tucks',
+                    '5 сведений лопаток',
+                    'Растяжка грудных',
+                    'Пройдитесь'
+                ],
+                tips: 'Используйте приложения-напоминания (Time Out, Stretchly).',
+                mistakes: 'Игнорирование напоминаний, продолжение сидения'
+            },
+            {
+                id: 47,
+                module: 'm4',
+                moduleName: 'M4 — Лайфстайл',
+                title: 'Правильное положение телефона',
+                duration: 'Постоянно',
+                difficulty: 'Легкий',
+                equipment: 'Не требуется',
+                target: 'Профилактика text neck',
+                description: 'Избегайте наклона головы к телефону.',
+                steps: [
+                    'Поднимите телефон на уровень глаз',
+                    'Держите перед собой',
+                    'Не наклоняйте голову вниз',
+                    'Используйте подставку',
+                    'Голосовые сообщения вместо набора'
+                ],
+                tips: 'Text neck создает нагрузку до 27 кг на шейный отдел!',
+                mistakes: 'Голова наклонена вниз, телефон на коленях'
+            },
+            {
+                id: 48,
+                module: 'm4',
+                moduleName: 'M4 — Лайфстайл',
+                title: 'Дыхательные упражнения в течение дня',
+                duration: '5 минут 2-3 раза в день',
+                difficulty: 'Легкий',
+                equipment: 'Не требуется',
+                target: 'Диафрагма, снятие стресса',
+                description: 'Диафрагмальное дыхание для расслабления.',
+                steps: [
+                    'Сядьте прямо',
+                    'Рука на животе',
+                    'Вдох через нос — живот надувается',
+                    'Выдох через рот — живот втягивается',
+                    '4 секунды вдох, 6 секунд выдох',
+                    '5 минут'
+                ],
+                tips: 'Можно делать в любом месте. Снижает стресс и улучшает осанку.',
+                mistakes: 'Поверхностное дыхание грудью'
+            },
+            {
+                id: 49,
+                module: 'm4',
+                moduleName: 'M4 — Лайфстайл',
+                title: 'Сон на правильной подушке',
+                duration: 'Каждую ночь',
+                difficulty: 'Легкий',
+                equipment: 'Ортопедическая подушка',
+                target: 'Положение шеи во сне',
+                description: 'Поддержка шейного отдела во время сна.',
+                steps: [
+                    'Выберите подушку по высоте',
+                    'На спине: средняя высота',
+                    'На боку: высота равна ширине плеча',
+                    'Избегайте сна на животе',
+                    'Подушка должна заполнять пространство под шеей'
+                ],
+                tips: 'Ортопедическая подушка с валиком под шею — оптимальный выбор.',
+                mistakes: 'Слишком высокая/низкая подушка, сон на животе'
+            },
+            {
+                id: 50,
+                module: 'm4',
+                moduleName: 'M4 — Лайфстайл',
+                title: 'Self-massage теннисным мячом',
+                duration: '5-10 минут',
+                difficulty: 'Легкий',
+                equipment: 'Теннисный мяч',
+                target: 'Грудные мышцы, триггерные точки',
+                description: 'Самомассаж для снятия напряжения.',
+                steps: [
+                    'Встаньте у стены',
+                    'Положите мяч между грудью и стеной',
+                    'Найдите болезненную точку',
+                    'Прижмитесь и задержитесь 30 сек',
+                    'Медленно прокатывайте',
+                    'Избегайте костей и суставов'
+                ],
+                tips: 'Особенно полезно для грудных мышц после работы за компьютером.',
+                mistakes: 'Слишком сильное давление, массаж позвоночника'
+            },
+            {
+                id: 51,
+                module: 'm4',
+                moduleName: 'M4 — Лайфстайл',
+                title: 'Осознанная ходьба',
+                duration: '10 минут',
+                difficulty: 'Легкий',
+                equipment: 'Не требуется',
+                target: 'Постуральный контроль',
+                description: 'Ходьба с контролем осанки.',
+                steps: [
+                    'Встаньте прямо',
+                    'Макушка тянется вверх',
+                    'Плечи отведены назад и вниз',
+                    'Грудь раскрыта',
+                    'Шагайте, сохраняя положение',
+                    'Дышите диафрагмой'
+                ],
+                tips: 'Практикуйте во время прогулок. Формируйте привычку.',
+                mistakes: 'Сутулость, голова вперед, взгляд в телефон'
+            },
+            {
+                id: 52,
+                module: 'm4',
+                moduleName: 'M4 — Лайфстайл',
+                title: 'Настройка эргономики рабочего места',
+                duration: '1 раз (поддержание)',
+                difficulty: 'Средний',
+                equipment: 'Эргономичная мебель',
+                target: 'Профилактика ВПС',
+                description: 'Полная настройка рабочего места.',
+                steps: [
+                    'Стул с поддержкой поясницы',
+                    'Высота стула: ноги на полу',
+                    'Подлокотники: локти под 90°',
+                    'Монитор на уровне глаз',
+                    'Клавиатура и мышь рядом',
+                    'Хорошее освещение'
+                ],
+                tips: 'Инвестиции в эргономику окупаются здоровьем.',
+                mistakes: 'Игнорирование эргономики, экономия на здоровье'
+            },
+            {
+                id: 53,
+                module: 'm4',
+                moduleName: 'M4 — Лайфстайл',
+                title: 'Вечерняя растяжка перед сном',
+                duration: '10 минут',
+                difficulty: 'Легкий',
+                equipment: 'Коврик',
+                target: 'Расслабление',
+                description: 'Комплекс для расслабления перед сном.',
+                steps: [
+                    'Растяжка грудных у стены',
+                    'Кошка-корова',
+                    'Child\'s pose (поза ребенка)',
+                    'Растяжка шеи',
+                    'Диафрагмальное дыхание',
+                    '5 минут'
+                ],
+                tips: 'Улучшает качество сна и снимает накопившееся напряжение.',
+                mistakes: 'Интенсивная растяжка перед сном (должна быть расслабляющей)'
+            },
+            {
+                id: 54,
+                module: 'm4',
+                moduleName: 'M4 — Лайфстайл',
+                title: 'Самоконтроль осанки',
+                duration: 'Постоянно',
+                difficulty: 'Средний',
+                equipment: 'Не требуется',
+                target: 'Awareness (осознанность)',
+                description: 'Развитие привычки следить за осанкой.',
+                steps: [
+                    'Проверяйте осанку каждый час',
+                    'Используйте напоминания',
+                    'Фотографируйте себя',
+                    'Зеркало на рабочем месте',
+                    'Приложения для осанки',
+                    'Ведите дневник'
+                ],
+                tips: 'Осознанность — первый шаг к изменениям. Практикуйте mindfulness.',
+                mistakes: 'Забывать проверять, полагаться только на упражнения'
+            }
+        ];
+
+        // Render exercises
+        function renderExercises(filter = 'all') {
+            const grid = document.getElementById('exercisesGrid');
+            const countEl = document.getElementById('exerciseCount');
+            grid.innerHTML = '';
+
+            const filtered = filter === 'all' 
+                ? exercises 
+                : exercises.filter(ex => ex.module === filter);
+
+            countEl.textContent = `Показано: ${filtered.length} упражнений`;
+
+            filtered.forEach(ex => {
+                const card = createExerciseCard(ex);
+                grid.appendChild(card);
+            });
+        }
+
+        function createExerciseCard(exercise) {
+            const card = document.createElement('div');
+            card.className = 'exercise-card';
+            card.onclick = () => openModal(exercise);
+
+            const moduleColors = {
+                m1: 'var(--color-accent-m1)',
+                m2: 'var(--color-accent-m2)',
+                m3: 'var(--color-accent-m3)',
+                m4: 'var(--color-accent-m4)'
+            };
+
+            card.innerHTML = `
+                <div class="exercise-header">
+                    <span class="exercise-module-badge ${exercise.module}">${exercise.moduleName}</span>
+                    <div class="exercise-number">Упражнение #${exercise.id}</div>
+                    <h3 class="exercise-title">${exercise.title}</h3>
+                </div>
+                <div class="exercise-body">
+                    <div class="exercise-meta">
+                        <div class="meta-item">⏱️ ${exercise.duration}</div>
+                        <div class="meta-item">📊 ${exercise.difficulty}</div>
+                        <div class="meta-item">🎯 ${exercise.equipment}</div>
+                    </div>
+                    <p class="exercise-description">${exercise.description}</p>
+                    <div class="exercise-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Целевые мышцы:</span>
+                            <span class="detail-value">${exercise.target}</span>
+                        </div>
+                    </div>
+                    <div class="view-more">
+                        Подробнее →
+                    </div>
+                </div>
+            `;
+
+            return card;
+        }
+
+        // Modal functions
+        function openModal(exercise) {
+            const modal = document.getElementById('modalOverlay');
+            const content = document.getElementById('modalContent');
+
+            const stepsHtml = exercise.steps.map((step, index) => 
+                `<li>${step}</li>`
+            ).join('');
+
+            content.innerHTML = `
+                <div class="modal-header" style="background: linear-gradient(135deg, ${getModuleColor(exercise.module)} 0%, ${getModuleColorDark(exercise.module)} 100%);">
+                    <span class="modal-module">${exercise.moduleName}</span>
+                    <h2 class="modal-title">${exercise.title}</h2>
+                    <div class="modal-meta">
+                        <span>⏱️ ${exercise.duration}</span>
+                        <span>📊 ${exercise.difficulty}</span>
+                        <span>🎯 ${exercise.equipment}</span>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-section">
+                        <h3 class="modal-section-title">Описание</h3>
+                        <div class="modal-section-content">${exercise.description}</div>
+                    </div>
+                    
+                    <div class="modal-section">
+                        <h3 class="modal-section-title">Целевые мышцы</h3>
+                        <div class="modal-section-content">${exercise.target}</div>
+                    </div>
+
+                    <div class="modal-section">
+                        <h3 class="modal-section-title">Техника выполнения</h3>
+                        <ol class="steps-list">
+                            ${stepsHtml}
+                        </ol>
+                    </div>
+
+                    <div class="tips-box">
+                        <strong>💡 Рекомендации:</strong>
+                        ${exercise.tips}
+                    </div>
+
+                    <div class="tips-box" style="margin-top: 15px; border-left-color: #f44336; background: linear-gradient(135deg, rgba(244, 67, 54, 0.08) 0%, rgba(244, 67, 54, 0.03) 100%);">
+                        <strong>⚠️ Частые ошибки:</strong>
+                        ${exercise.mistakes}
+                    </div>
+                </div>
+            `;
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(event) {
+            if (!event || event.target.id === 'modalOverlay' || event.target.className === 'modal-close') {
+                const modal = document.getElementById('modalOverlay');
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function getModuleColor(module) {
+            const colors = {
+                m1: '#FF9800',
+                m2: '#4CAF50',
+                m3: '#2196F3',
+                m4: '#9C27B0'
+            };
+            return colors[module] || '#3D8B5E';
+        }
+
+        function getModuleColorDark(module) {
+            const colors = {
+                m1: '#E65100',
+                m2: '#1B5E20',
+                m3: '#0D47A1',
+                m4: '#4A148C'
+            };
+            return colors[module] || '#2D6B4A';
+        }
+
+        // Filter functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                renderExercises(this.dataset.filter);
+            });
+        });
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Initial render
+        renderExercises();
+    </script>
+</body>
+</html>
